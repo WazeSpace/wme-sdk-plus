@@ -53,31 +53,34 @@ export class MethodInterceptor<
   }
 
   private swapToInterceptor() {
-    this._fnSwapper.swap(((...args: Parameters<FunctionOfTarget<Target, FnKey>>) => {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const that = this;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this._fnSwapper.swap((function (this: any, ...args: Parameters<FunctionOfTarget<Target, FnKey>>) {
       // If the interceptor is disabled, we still want to process it ourselves in case someone has
       // also overriden our own "interceptor", so if we would restore the original function
       // their interceptor would also be ripped off, potentially leading to weird bugs
       // By checking whether our interceptor is disabled, and invoking the original function
       // we guarantee that interceptors registered afterwards are still can be trigerred
       // and they just would trigger the original function, as we never have touched anything
-      if (!this._enabled) return this.callOriginalInvocator(...args);
+      if (!that._enabled) return that.callOriginalInvocator(...args);
 
-      const middlewaresResult = this.runMiddlewares(args);
+      const middlewaresResult = that.runMiddlewares(args);
       if (middlewaresResult) {
         if ('output' in middlewaresResult) return middlewaresResult.output;
         if ('input' in middlewaresResult) args = middlewaresResult.input;
       }
 
-      return this._interceptionFunction.call(
-        this._fnSwapper.target,
-        this.getOriginalInvocator(),
+      return that._interceptionFunction.call(
+        this,
+        that.getOriginalInvocator(this),
         ...args
       );
     }) as Target[FnKey]);
   }
 
-  private getOriginalInvocator(): FunctionOfTarget<Target, FnKey> {
-    return this._fnSwapper.originalValue.bind(this._fnSwapper.target) as FunctionOfTarget<Target, FnKey>;
+  private getOriginalInvocator(thisOverride?: any): FunctionOfTarget<Target, FnKey> {
+    return this._fnSwapper.originalValue.bind(thisOverride ?? this._fnSwapper.target) as FunctionOfTarget<Target, FnKey>;
   }
 
   callOriginalInvocator(...args: Parameters<FunctionOfTarget<Target, FnKey>>): ReturnType<FunctionOfTarget<Target, FnKey>> {

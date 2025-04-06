@@ -5,6 +5,7 @@ import {
 } from '@wme-enhanced-sdk/sdk-patcher';
 import { MiddlewareRegistry } from './lib/middleware-registry.js';
 import { REGISTRY_ARTIFACT } from './consts.js';
+import updateRequests_addComment_middleware from './middlewares/updateRequests/addComment.js';
 import { MiddlewareHandler } from './lib/middleware-handler.js';
 
 export default [
@@ -24,4 +25,5 @@ export default [
       },
     { isFactory: true }
   ),
+  updateRequests_addComment_middleware,
 ];

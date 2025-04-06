@@ -49,11 +49,11 @@ export class SdkPatcher {
       Reflect.defineMetadata(ARTIFACTS, artifacts, sdk);
     }
 
-    const newArtifacts = (await Promise.all(hook.map((hook) => hook.install({ 
-      sdk,
-      artifacts,
-    })))).filter((artifacts) => artifacts && typeof artifacts === 'object');
-    Object.assign(artifacts, ...newArtifacts);
+    for (const rule of hook) {
+      const newArtifacts = await rule.install({ sdk, artifacts });
+      if (!newArtifacts || typeof newArtifacts !== 'object') continue;
+      Object.assign(artifacts, newArtifacts);
+    }
     this.markHookAsInstalled(sdk, name);
   }
 

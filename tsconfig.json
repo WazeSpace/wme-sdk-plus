@@ -35,6 +35,9 @@
     },
     {
       "path": "./packages/patch-datamodel--bigjunctions"
+    },
+    {
+      "path": "./packages/patch-middleware"
     }
   ]
 }

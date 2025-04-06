@@ -1,5 +1,5 @@
 {
-  "name": "@wme-enhanced-sdk/wme-sdk-plus",
+  "name": "@wme-enhanced-sdk/patch-middleware",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -15,7 +15,11 @@
     }
   },
   "dependencies": {
-    "@wme-enhanced-sdk/patch-datamodel--bigjunctions": "^0.0.1",
-    "@wme-enhanced-sdk/patch-middleware": "^0.0.1"
+    "@wme-enhanced-sdk/method-interceptor": "^0.0.1",
+    "@wme-enhanced-sdk/sdk-patcher": "^0.0.1",
+    "@wme-enhanced-sdk/utils": "^0.0.1"
+  },
+  "devDependencies": {
+    "wme-sdk-typings": "https://web-assets.waze.com/wme_sdk_docs/production/latest/wme-sdk-typings.tgz"
   }
 }

@@ -16,6 +16,9 @@
       "path": "../sdk-patcher"
     },
     {
+      "path": "../patch-middleware"
+    },
+    {
       "path": "../patch-datamodel--bigjunctions"
     },
     {

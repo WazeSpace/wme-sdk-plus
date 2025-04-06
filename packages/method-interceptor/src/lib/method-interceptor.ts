@@ -41,6 +41,9 @@ export class MethodInterceptor<
   disable() {
     this._enabled = false;
     if (!this.enabled) return;
+  }
+
+  restore() {
     this._fnSwapper.restore();
   }
 

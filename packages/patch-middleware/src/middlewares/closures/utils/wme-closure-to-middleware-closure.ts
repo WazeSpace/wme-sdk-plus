@@ -16,7 +16,7 @@ export function wmeClosureToMiddlewareClosure(
     id: closure.state === 'INSERT' ? null : closure.attributes.id,
     closureType: WME_TYPE_TO_MIDDLEWARE[closure.type],
     startDate: new Date(closure.attributes.startDate),
-    endDate: new Date(closure.attributes.startDate),
+    endDate: new Date(closure.attributes.endDate),
     description: closure.attributes.reason,
     eventId: closure.attributes.eventId,
   };

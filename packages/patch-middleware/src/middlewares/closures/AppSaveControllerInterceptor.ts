@@ -55,7 +55,7 @@ class SaveRequest {
 
     let actions = { subActions: this.actions };
 
-    while (path.length) actions = (actions.subActions?.[path.unshift()] as any);
+    while (path.length) actions = (actions.subActions?.[path.shift()!] as any);
 
     if (lastPathIndex)
       actions.subActions.splice(lastPathIndex, 1);
@@ -66,7 +66,7 @@ class SaveRequest {
 
     let actions = { subActions: this.actions };
 
-    while (path.length) actions = (actions.subActions?.[path.unshift()] as any);
+    while (path.length) actions = (actions.subActions?.[path.shift()!] as any);
 
     if (lastPathIndex)
       actions.subActions.splice(lastPathIndex, 1, ...actionsToInsert);

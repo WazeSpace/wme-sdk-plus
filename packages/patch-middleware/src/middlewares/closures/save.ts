@@ -24,7 +24,10 @@ import { ROAD_CLOSURE_ARTIFACT, TURN_CLOSURE_ARTIFACT } from './consts.js';
 
 function closureActionToClosureData(action: AnyClosureAction): Closure | SegmentClosure | TurnClosure | ClosureToDelete<Closure | SegmentClosure | TurnClosure> | null {
   if (isAddRoadClosureAction(action))
-    return wmeClosureToMiddlewareClosure(action.closure);
+    return { ...wmeClosureToMiddlewareClosure(action.closure), id: null };
+
+  if (isAddTurnClosureAction(action))
+    return { ...wmeClosureToMiddlewareClosure(action.getObject()), id: null };
 
   if (isUpdateRoadClosureAction(action))
     return wmeClosureToMiddlewareClosure(action.getObject());
@@ -32,7 +35,7 @@ function closureActionToClosureData(action: AnyClosureAction): Closure | Segment
   if (isDeleteRoadClosureAction(action))
     return wmeClosureToMiddlewareClosure(action.closure);
 
-  if (isAddTurnClosureAction(action) || isUpdateTurnClosureAction(action) || isDeleteTurnClosureAction(action))
+  if (isUpdateTurnClosureAction(action) || isDeleteTurnClosureAction(action))
     return wmeClosureToMiddlewareClosure(action.getObject());
 
   return null;

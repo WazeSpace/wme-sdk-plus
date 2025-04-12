@@ -3,7 +3,7 @@ name: Bug report
 about: Create a report to help us improve. Note we won't be fixing any native SDK
   bugs.
 title: ''
-labels: bug
+type: bug
 assignees: davidsl4
 
 ---

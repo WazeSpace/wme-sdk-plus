@@ -28,7 +28,7 @@ function findActionPathInList(actions: any[], actionToMatch: any | ((action: any
   return null;
 }
 
-class SaveRequest {
+export class SaveRequest {
   actions: Action[];
 
   constructor(actions: Action[]) {
@@ -80,13 +80,39 @@ class SaveRequest {
 export class AppSaveControllerInterceptor {
   private saveInterceptor: MethodInterceptor<WmeAppController, 'save'>;
 
-  constructor(wObject: any, fn: (request: SaveRequest) => void | Promise<void>) {
+  constructor(wObject: any, fn: (request: SaveRequest) => void | Promise<void> | SaveRequest[] | Promise<SaveRequest[] | undefined>) {
     this.saveInterceptor = new MethodInterceptor(
       wObject.controller as WmeAppController,
       'save',
       async function (invoke, options, ...args) {
         const request = new SaveRequest(options?.actions || (this as WmeAppController).model.actionManager.getActions());
-        await Promise.resolve(fn(request));
+        const fnResult = await Promise.resolve(fn(request));
+
+        if (fnResult) {
+          const combinedResult: Awaited<ReturnType<WmeAppController['save']>> = {
+            pendingEdits: null,
+            saveCount: {
+              bigJunctions: 0,
+              nodes: 0,
+              segments: 0,
+              venues: 0,
+            },
+            unsavedFeatures: [],
+          };
+
+          for (const request of fnResult) {
+            const result = await invoke({
+              ...(options || {}),
+              actions: request.actions,
+            }, ...args);
+            combinedResult.saveCount.bigJunctions += result.saveCount.bigJunctions;
+            combinedResult.saveCount.nodes += result.saveCount.nodes;
+            combinedResult.saveCount.segments += result.saveCount.segments;
+            combinedResult.saveCount.venues += result.saveCount.venues;
+            if (result.unsavedFeatures) combinedResult.unsavedFeatures.push(...result.unsavedFeatures);
+          }
+          return combinedResult;
+        }
 
         return invoke({
           ...(options || {}),

@@ -14,8 +14,8 @@ import { serializeDate } from './serialize-date.js';
 function getRepositoryByClosureType(type: Closure['closureType']): any {
   const window = getWindow<any>();
   const typeToRepositoryName: Record<Closure['closureType'], string> = {
-    SEGMENT: 'roadClosures',
-    TURN: 'turnClosures',
+    SEGMENT: 'roadClosure',
+    TURN: 'turnClosure',
   };
 
   return window.W.model.getRepository(typeToRepositoryName[type]);

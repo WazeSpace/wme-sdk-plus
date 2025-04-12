@@ -124,7 +124,7 @@ export default [
             }
 
             // we have an ID, we need to update
-            const existingClosure = window.W.model.getRepository(closure.closureType === 'SEGMENT' ? 'roadClosures' : 'turnClosures').getObjectById(closure.id);
+            const existingClosure = window.W.model.getRepository(closure.closureType === 'SEGMENT' ? 'roadClosure' : 'turnClosure').getObjectById(closure.id);
             if (!existingClosure) return null;
             const UpdateObject = window.require('Waze/Action/UpdateObject');
             return new UpdateObject(existingClosure, wmeClosure.attributes);

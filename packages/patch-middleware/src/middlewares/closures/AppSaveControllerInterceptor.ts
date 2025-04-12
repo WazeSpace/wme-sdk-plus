@@ -57,7 +57,7 @@ class SaveRequest {
 
     while (path.length) actions = (actions.subActions?.[path.shift()!] as any);
 
-    if (lastPathIndex)
+    if (lastPathIndex !== undefined)
       actions.subActions.splice(lastPathIndex, 1);
   }
 
@@ -68,7 +68,7 @@ class SaveRequest {
 
     while (path.length) actions = (actions.subActions?.[path.shift()!] as any);
 
-    if (lastPathIndex)
+    if (lastPathIndex !== undefined)
       actions.subActions.splice(lastPathIndex, 1, ...actionsToInsert);
   }
 

@@ -11,7 +11,7 @@ export interface WmeAppController {
       segments: number;
       venues: number;
     };
-    unsavedFeatures: unknown;
+    unsavedFeatures: unknown[];
   }>;
 
   model: any;

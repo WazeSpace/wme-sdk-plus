@@ -1,6 +1,6 @@
-import { getWazeMapEditorWindow } from '../../../utils/get-wme-window';
+import { getWindow } from '@wme-enhanced-sdk/utils';
 
-export const MultiAction = getWazeMapEditorWindow().require(
+export const MultiAction = getWindow().require(
   'Waze/Action/MultiAction',
 );
 MultiAction.Base = MultiAction.__proto__;

@@ -4,6 +4,9 @@
   "include": [],
   "references": [
     {
+      "path": "../wme-utils"
+    },
+    {
       "path": "../utils"
     },
     {

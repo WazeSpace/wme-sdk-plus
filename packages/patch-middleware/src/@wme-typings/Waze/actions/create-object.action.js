@@ -1,6 +1,6 @@
-import { getWazeMapEditorWindow } from '../../../utils/get-wme-window';
+import { getWindow } from '@wme-enhanced-sdk/utils';
 
-export const CreateObjectAction = getWazeMapEditorWindow().require(
+export const CreateObjectAction = getWindow().require(
   'Waze/Action/CreateObject',
 );
 

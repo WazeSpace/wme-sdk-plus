@@ -1,10 +1,10 @@
-import { getWazeMapEditorWindow } from '../../../utils/get-wme-window';
+import { getWindow } from '@wme-enhanced-sdk/utils';
 
-export const UpdateObjectAction = getWazeMapEditorWindow().require(
+export const UpdateObjectAction = getWindow().require(
   'Waze/Action/UpdateObject',
 );
 
-export function isDeleteObjectAction(action) {
+export function isUpdateObjectAction(action) {
   return action.actionName === 'UPDATE_OBJECT';
 }
 

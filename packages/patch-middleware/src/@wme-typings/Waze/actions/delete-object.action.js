@@ -1,6 +1,6 @@
-import { getWazeMapEditorWindow } from '../../../utils/get-wme-window';
+import { getWindow } from '@wme-enhanced-sdk/utils';
 
-export const DeleteObjectAction = getWazeMapEditorWindow().require(
+export const DeleteObjectAction = getWindow().require(
   'Waze/Action/DeleteObject',
 );
 

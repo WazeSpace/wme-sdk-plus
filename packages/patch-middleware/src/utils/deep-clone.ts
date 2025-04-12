@@ -7,6 +7,8 @@ export function deepClone<T>(obj: T): T {
     return obj.map(item => deepClone(item)) as T;
   }
 
+  if (obj instanceof Date) return new Date(obj) as T;
+
   const clonedObj: T = {} as T;
   for (const key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {

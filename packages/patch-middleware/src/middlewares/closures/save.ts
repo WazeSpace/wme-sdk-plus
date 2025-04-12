@@ -93,6 +93,7 @@ export default [
             const path = saveRequest.getActionPath(action);
             if (!path) return;
             saveRequest.removeAction(path);
+            action.undoAction(window.W.model);
           });
           const setClosureActions = mutatedContextData.closures.map((closure) => {
             const window = getWindow<any>();

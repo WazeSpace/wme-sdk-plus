@@ -132,7 +132,7 @@ export default [
           });
           const deleteClosureActions = mutatedContextData.deleteClosures.map((closure) => {
             const window = getWindow<any>();
-            const existingClosure = window.W.model.getRepository(closure.closureType === 'SEGMENT' ? 'roadClosures' : 'turnClosures').getObjectById(closure.id);
+            const existingClosure = window.W.model.getRepository(closure.closureType === 'SEGMENT' ? 'roadClosure' : 'turnClosure').getObjectById(closure.id);
             if (!existingClosure) return null;
             const DeleteObject = window.require('Waze/Action/DeleteObject');
             return new DeleteObject(existingClosure);

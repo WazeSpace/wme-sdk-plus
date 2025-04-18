@@ -105,11 +105,18 @@ export class AppSaveControllerInterceptor {
               ...(options || {}),
               actions: request.actions,
             }, ...args);
-            combinedResult.saveCount.bigJunctions += result.saveCount.bigJunctions;
-            combinedResult.saveCount.nodes += result.saveCount.nodes;
-            combinedResult.saveCount.segments += result.saveCount.segments;
-            combinedResult.saveCount.venues += result.saveCount.venues;
-            if (result.unsavedFeatures) combinedResult.unsavedFeatures.push(...result.unsavedFeatures);
+            if (combinedResult.saveCount) {
+              combinedResult.saveCount.bigJunctions += result.saveCount.bigJunctions;
+              combinedResult.saveCount.nodes += result.saveCount.nodes;
+              combinedResult.saveCount.segments += result.saveCount.segments;
+              combinedResult.saveCount.venues += result.saveCount.venues;
+            }
+            if (result.unsavedFeatures) {
+              if (Array.isArray(combinedResult.unsavedFeatures))
+                combinedResult.unsavedFeatures.push(...result.unsavedFeatures);
+              else
+                console.warn('result.unsavedFeatures has unexpected response type: expected array, returned ', result.unsavedFeatures);
+            }
           }
           return combinedResult;
         }

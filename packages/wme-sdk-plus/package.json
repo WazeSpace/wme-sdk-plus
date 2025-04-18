@@ -15,6 +15,7 @@
     }
   },
   "dependencies": {
-    "@wme-enhanced-sdk/patch-datamodel--bigjunctions": "^0.0.1"
+    "@wme-enhanced-sdk/patch-datamodel--bigjunctions": "^0.0.1",
+    "@wme-enhanced-sdk/patch-middleware": "^0.0.1"
   }
 }

@@ -4,22 +4,16 @@
   "include": [],
   "references": [
     {
-      "path": "../patch-datamodel--permanenthazards"
+      "path": "../wme-utils"
     },
     {
-      "path": "../patch-datamodel--mapcomments"
-    },
-    {
-      "path": "../patch-editing--transactions"
+      "path": "../utils"
     },
     {
       "path": "../sdk-patcher"
     },
     {
-      "path": "../patch-middleware"
-    },
-    {
-      "path": "../patch-datamodel--bigjunctions"
+      "path": "../method-interceptor"
     },
     {
       "path": "./tsconfig.lib.json"

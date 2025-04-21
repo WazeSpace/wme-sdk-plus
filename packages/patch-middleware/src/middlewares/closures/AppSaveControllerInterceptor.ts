@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MethodInterceptor } from '@wme-enhanced-sdk/method-interceptor';
-import { WmeAppController } from './interfaces/wme-app-controller.js';
+import { LegacySaveResponse, SaveResponse, WmeAppController } from './interfaces/wme-app-controller.js';
 import { Action } from '../../@wme-typings/Waze/actions/action.js';
 import { isMultiAction } from '../../@wme-typings/Waze/actions/multi-action.js';
+import { mergeSaveResponses } from './utils/merge-save-responses.js';
 
 function findActionPathInList(actions: any[], actionToMatch: any | ((action: any) => boolean)): number[] | null {
   const path: number[] = [];
@@ -55,6 +56,7 @@ export class SaveRequest {
 
     let actions = { subActions: this.actions };
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     while (path.length) actions = (actions.subActions?.[path.shift()!] as any);
 
     if (lastPathIndex !== undefined)
@@ -66,6 +68,7 @@ export class SaveRequest {
 
     let actions = { subActions: this.actions };
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     while (path.length) actions = (actions.subActions?.[path.shift()!] as any);
 
     if (lastPathIndex !== undefined)
@@ -89,36 +92,19 @@ export class AppSaveControllerInterceptor {
         const fnResult = await Promise.resolve(fn(request));
 
         if (fnResult) {
-          const combinedResult: Awaited<ReturnType<WmeAppController['save']>> = {
-            pendingEdits: null,
-            saveCount: {
-              bigJunctions: 0,
-              nodes: 0,
-              segments: 0,
-              venues: 0,
-            },
-            unsavedFeatures: [],
-          };
+          let combinedResult: LegacySaveResponse | SaveResponse | null = null;
 
           for (const request of fnResult) {
             const result = await invoke({
               ...(options || {}),
               actions: request.actions,
             }, ...args);
-            if (combinedResult.saveCount) {
-              combinedResult.saveCount.bigJunctions += result.saveCount.bigJunctions;
-              combinedResult.saveCount.nodes += result.saveCount.nodes;
-              combinedResult.saveCount.segments += result.saveCount.segments;
-              combinedResult.saveCount.venues += result.saveCount.venues;
-            }
-            if (result.unsavedFeatures) {
-              if (Array.isArray(combinedResult.unsavedFeatures))
-                combinedResult.unsavedFeatures.push(...result.unsavedFeatures);
-              else
-                console.warn('result.unsavedFeatures has unexpected response type: expected array, returned ', result.unsavedFeatures);
-            }
+
+            if (!combinedResult) combinedResult = result;
+            else combinedResult = mergeSaveResponses(combinedResult, result);
           }
-          return combinedResult;
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return combinedResult!;
         }
 
         return invoke({

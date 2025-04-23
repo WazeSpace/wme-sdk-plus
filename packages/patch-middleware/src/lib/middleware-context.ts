@@ -25,6 +25,19 @@ export class MiddlewareContext<D extends object> {
   /** Reference to the root {@link WmeSDK} instance. */
   readonly wmeSdk!: WmeSDK;
 
+  /**
+   * Creates a new instance of the MiddlewareContext class.
+   * @param actionPoint The action point being intercepted.
+   * @param data The data associated with the action.
+   * @param originalData An immutable snapshot of the data before any changes were made. The original data must be frozen by the caller.
+   * @param wmeSdk The root WmeSDK instance.
+   * @example
+   * ```ts
+   * const firstCallerData = { someProperty: 'value' };
+   * const frozenData = deepFreeze(firstCallerData);
+   * const context = new MiddlewareContext('someActionPoint', firstCallerData, frozenData, wmeSdk);
+   * ```
+   */
   constructor(
     actionPoint: string,
     data: D,

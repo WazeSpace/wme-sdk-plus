@@ -1,4 +1,4 @@
-import { DataModel } from '@/@waze/Waze/DataModels/DataModel';
+import { DataModel } from '../DataModels/DataModel.ts';
 
 export class Action<P = any> {
   protected shouldSerialize: boolean;

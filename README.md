@@ -1,90 +1,31 @@
-# WmeEnhancedSdk
+<p align="center">
+  <b>WME SDK+</b>
+</p>
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+<p align="center">
+  An extension library enhancing the native Waze Map Editor SDK for script developers.
+</p>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Description
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+WME SDK+ provides additional features, middleware capabilities, and utilities on top of the official Waze Map Editor (WME) SDK, designed to accelerate script development and bridge functionality gaps.
 
-## Finish your CI setup
+## Motivation
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/lkjrf9WvDh)
+While we have an official WME SDK, its development is very slow, and it blocks the migration of scripts to the SDK. Once a feature in the WME SDK is implemented, it takes a lot longer for script writers to migrate to the SDK.
 
+WME SDK+ is purposed to resolve this situation, by "patching" and adding the unimplemented functions to the SDK instances (extending the official SDK) and providing a unified implementation that is expected to match Waze's signatures for the methods, allowing a seamless transition to the official SDK once Waze implement the feature on their end.
 
-## Generate a library
+## Documentation
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
-```
+For comprehensive information about getting started with SDK+, all APIs, features, configuration options, middleware action points, and advanced usage patterns, please refer to the [WME SDK+ Wiki](https://github.com/WazeSpace/wme-sdk-plus/wiki).
 
-## Run tasks
+## Contribution
 
-To build the library use:
+Contributions are highly welcome! We aim to make WME SDK+ a robust community-driven library.
 
-```sh
-npx nx build pkg1
-```
+Please see our [**Contributing Guidelines**](/CONTRIBUTING.md) if you're interested in helping improve WME SDK+.
 
-To run any task with Nx use:
+## License
 
-```sh
-npx nx <target> <project-name>
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
-```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](hhttps://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
-```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+This add-on is licensed under the Apache License, Version 2.0. See the [LICENSE](/LICENSE) file for details.

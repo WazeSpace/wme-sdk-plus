@@ -8,5 +8,7 @@ export interface DeleteRoadClosureAction {
   segment: any;
 }
 export function isDeleteRoadClosureAction(action: any): action is DeleteRoadClosureAction {
-  return action.actionName === ACTION_NAME;
+  return action?.actionName === ACTION_NAME
+    && action?.closure !== undefined 
+    && action?.segment !== undefined;
 }

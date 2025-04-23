@@ -67,7 +67,7 @@ export function middlewareClosureToWmeClosure(
         permanent: closure.permanent,
         segID: closure.segmentId,
         forward: closure.forward,
-        fromNodeClosed: closure.nodeClousre,
+        fromNodeClosed: closure.nodeClosure,
       });
     case 'TURN':
       return new artifacts[TURN_CLOSURE_ARTIFACT]({

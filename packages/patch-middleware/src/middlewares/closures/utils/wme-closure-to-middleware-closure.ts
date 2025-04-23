@@ -29,7 +29,7 @@ export function wmeClosureToMiddlewareClosure(
         permanent: closure.getAttribute('permanent'),
         segmentId: closure.getAttribute('segID'),
         forward: closure.getAttribute('forward'),
-        nodeClousre: closure.getAttribute('fromNodeClosed'),
+        nodeClosure: closure.getAttribute('fromNodeClosed'),
         provider: closure.getAttribute('provider'),
       };
     case 'turnClosure':

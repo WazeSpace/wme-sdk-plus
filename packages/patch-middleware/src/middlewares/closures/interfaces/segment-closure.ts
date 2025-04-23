@@ -12,7 +12,7 @@ export interface SegmentClosure extends Closure {
   /**
    * Indicates whether the node before the closure (for “forward” direction closures, it’s node A; for “reverse” direction closures, it’s node B).
    */
-  nodeClousre: boolean;
+  nodeClosure: boolean;
 
   /** Indicates if the closure is permanent (won’t auto-open). */
   permanent: boolean;

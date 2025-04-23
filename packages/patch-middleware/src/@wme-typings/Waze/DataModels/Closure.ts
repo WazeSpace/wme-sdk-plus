@@ -27,7 +27,7 @@ export interface ClosureAttributes extends DataModelAttributes<string> {
 
   startDate: string;
   endDate: string;
-  eventId: string;
+  eventId?: string;
 
   externalProvider: unknown;
   externalProviderId: unknown;

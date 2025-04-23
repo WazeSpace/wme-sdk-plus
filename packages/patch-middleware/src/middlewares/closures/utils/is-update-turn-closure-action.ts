@@ -4,5 +4,5 @@ import { isUpdateObjectAction, UpdateObjectAction } from '../../../@wme-typings/
 export type UpdateTurnClosureAction = UpdateObjectAction<TurnClosure>;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function isUpdateTurnClosureAction(action: any): action is UpdateTurnClosureAction {
-  return isUpdateObjectAction(action) && action.object.type === 'turnClosure';
+  return isUpdateObjectAction(action) && action.object?.type === 'turnClosure';
 }

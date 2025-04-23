@@ -4,5 +4,5 @@ import { RoadClosure } from '../../../@wme-typings/Waze/DataModels/RoadClosure.j
 export type UpdateRoadClosureAction = UpdateObjectAction<RoadClosure>;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function isUpdateRoadClosureAction(action: any): action is UpdateRoadClosureAction {
-  return isUpdateObjectAction(action) && action.object.type === 'roadClosure';
+  return isUpdateObjectAction(action) && action.object?.type === 'roadClosure';
 }

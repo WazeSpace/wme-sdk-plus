@@ -19,7 +19,7 @@ export interface Closure {
   endDate: Date;
 
   /** If provided, associates the closure with a specific major traffic event by its ID */
-  eventId: string;
+  eventId?: string;
 }
 
 export type ClosureToDelete<C extends Closure> = Required<Pick<C, 'id' | 'closureType'>>;

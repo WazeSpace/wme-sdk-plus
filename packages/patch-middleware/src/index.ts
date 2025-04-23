@@ -22,6 +22,7 @@ export default [
     ({ artifacts }: any) =>
       (actionPoint: string, handler: MiddlewareHandler<any, any>) => {
         const registry: MiddlewareRegistry = artifacts[REGISTRY_ARTIFACT];
+        if (!registry) throw new Error('Middleware registry not found in artifacts');
         return registry?.register(actionPoint, handler);
       },
     { isFactory: true }

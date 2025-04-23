@@ -6,6 +6,14 @@ export function mergeSaveResponses(
   a: LegacySaveResponse | SaveResponse,
   b: LegacySaveResponse | SaveResponse,
 ): LegacySaveResponse | SaveResponse {
+  if (!a || !b) {
+    const nonNullResponse = a || b;
+    if (!nonNullResponse) {
+      throw new Error('Both responses are null or undefined');
+    }
+    return nonNullResponse;
+  }
+
   const isALegacy = isLegacySaveResponse(a);
   const isBLegacy = isLegacySaveResponse(b);
 

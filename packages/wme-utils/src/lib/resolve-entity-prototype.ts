@@ -3,9 +3,24 @@ import { getWindow } from '@wme-enhanced-sdk/utils';
 import { defaultFetchInterceptor, isOfEndpoint, createJsonResponse } from '@wme-enhanced-sdk/fetch-interceptor';
 import { PropertySwapper } from '@wme-enhanced-sdk/method-interceptor';
 
+interface DescartesHttpClient {
+  createAbortController(name: string): AbortController;
+}
+interface DescartesClient {
+  descartesHttpClient: DescartesHttpClient;
+}
+
+function isLegacyDescartesClient(descartesClient: any): descartesClient is DescartesHttpClient {
+  return !('descartesHttpClient' in descartesClient) &&
+    'createAbortController' in descartesClient &&
+    typeof descartesClient.createAbortController === 'function';
+
+}
 function patchAbortControllerOnce() {
   const window = getWindow<{ W: any }>();
-  const swapper = new PropertySwapper(window.W.controller.descartesClient, 'createAbortController');
+  const descartesClient: DescartesClient | DescartesHttpClient = window.W.controller.descartesClient;
+  const httpDescartesClient = isLegacyDescartesClient(descartesClient) ? descartesClient : descartesClient.descartesHttpClient;
+  const swapper = new PropertySwapper(httpDescartesClient, 'createAbortController');
   swapper.swap(() => {
     swapper.restore();
     return new AbortController();

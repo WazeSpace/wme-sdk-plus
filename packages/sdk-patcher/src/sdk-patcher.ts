@@ -50,6 +50,11 @@ export class SdkPatcher {
     }
 
     for (const rule of hook) {
+      if (typeof rule === 'function') {
+        await rule({ sdk, artifacts });
+        continue;
+      }
+
       const newArtifacts = await rule.install({ sdk, artifacts });
       if (!newArtifacts || typeof newArtifacts !== 'object') continue;
       Object.assign(artifacts, newArtifacts);

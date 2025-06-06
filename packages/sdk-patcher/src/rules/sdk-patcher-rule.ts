@@ -8,7 +8,12 @@ export interface SdkPatcherRuleOperationArgs {
   artifacts: Artifacts;
 }
 
-export interface SdkPatcherRule {
+interface SdkPatcherRuleObject {
   install(args: SdkPatcherRuleOperationArgs): void | Artifacts | Promise<void | Artifacts>;
   uninstall?(args: SdkPatcherRuleOperationArgs): void | Artifacts | Promise<void | Artifacts>;
 }
+
+type SdkPatcherRuleDestructor = () => void | Promise<void>;
+type SdkPatcherRuleFn = (args: SdkPatcherRuleOperationArgs) => void | Promise<void> | SdkPatcherRuleDestructor;
+
+export type SdkPatcherRule = SdkPatcherRuleObject | SdkPatcherRuleFn;

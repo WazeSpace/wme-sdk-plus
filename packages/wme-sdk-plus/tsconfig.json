@@ -19,6 +19,9 @@
       "path": "../patch-middleware"
     },
     {
+      "path": "../patch-events"
+    },
+    {
       "path": "../patch-datamodel--bigjunctions"
     },
     {

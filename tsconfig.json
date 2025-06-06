@@ -38,6 +38,9 @@
     },
     {
       "path": "./packages/patch-middleware"
+    },
+    {
+      "path": "./packages/patch-events"
     }
   ]
 }

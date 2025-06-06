@@ -4,6 +4,7 @@ import DataModelMapCommentsHook from '@wme-enhanced-sdk/patch-datamodel--mapcomm
 import DataModelPermanentHazardsHook from '@wme-enhanced-sdk/patch-datamodel--permanenthazards';
 import DataModelBigJunctionsModule from '@wme-enhanced-sdk/patch-datamodel--bigjunctions';
 import MiddlewareModule from '@wme-enhanced-sdk/patch-middleware';
+import EventsModule from '@wme-enhanced-sdk/patch-events';
 
 interface ListedHook {
   hook: SdkPatcherRule[];
@@ -15,6 +16,7 @@ const allHooks: Record<string, ListedHook> = {
   'DataModel.MapComments': { hook: DataModelMapCommentsHook },
   'DataModel.PermanentHazards': { hook: DataModelPermanentHazardsHook },
   'DataModel.BigJunctions': { hook: DataModelBigJunctionsModule },
+  'Events': { hook: EventsModule },
   'Middlewares': { hook: MiddlewareModule },
 };
 
